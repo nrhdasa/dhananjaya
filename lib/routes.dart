@@ -17,11 +17,10 @@ final InternetCubit _internetCubit = InternetCubit();
 
 class DBlocBuilder extends StatelessWidget {
   final Widget? child;
-  DBlocBuilder({Key? key, this.child}) : super(key: key);
+  const DBlocBuilder({Key? key, this.child}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    print(_authCubit.state);
     return BlocProvider<InternetCubit>.value(
         value: _internetCubit,
         child: BlocProvider<AuthCubit>.value(
@@ -36,17 +35,17 @@ final GoRouter router = GoRouter(
   routes: <RouteBase>[
     GoRoute(
       path: '/',
-      builder: (BuildContext context, GoRouterState state) => DBlocBuilder(child: Homepage()),
+      builder: (BuildContext context, GoRouterState state) => const DBlocBuilder(child: Homepage()),
       routes: <RouteBase>[
         GoRoute(
           path: 'successapi',
-          builder: (BuildContext context, GoRouterState state) => SuccessAPI(),
+          builder: (BuildContext context, GoRouterState state) => const SuccessAPI(),
         ),
         GoRoute(
           path: 'apipage',
-          builder: (BuildContext context, GoRouterState state) => Apipage(),
+          builder: (BuildContext context, GoRouterState state) => const Apipage(),
         ),
-        GoRoute(path: 'searchdonor', builder: (BuildContext context, GoRouterState state) => DBlocBuilder(child: SearchDonor()), routes: <RouteBase>[
+        GoRoute(path: 'searchdonor', builder: (BuildContext context, GoRouterState state) => const DBlocBuilder(child: SearchDonor()), routes: <RouteBase>[
           GoRoute(
               name: "donor",
               path: "donor/:id",

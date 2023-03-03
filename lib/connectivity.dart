@@ -1,10 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
-
-import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
@@ -21,7 +16,6 @@ class Auth {
     var response = await client.post(url, headers: {'Authorization': 'token $key:$secret'});
     prefs.setString("user", jsonDecode(response.body)['message']['user']);
     prefs.setString("full_name", jsonDecode(response.body)['message']['full_name']);
-    print(jsonDecode(response.body)['message']['full_name']);
   }
 
   static getAPI() async {
@@ -37,9 +31,6 @@ class Auth {
     try {
       var url = Uri.https(domain, '/api/method/frappe.auth.get_logged_user');
       var response = await client.post(url, headers: {'Authorization': 'token $key:$secret'});
-      print('Response status: ${response.statusCode}');
-      print('Response body: ${response.body}');
-
       if (response.statusCode == 200) {
         return true;
       } else {

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart' as urllauncher;
 
+import 'addresses.dart';
+
 class ContactsTab extends StatelessWidget {
   final Map data;
   const ContactsTab({Key? key, required this.data}) : super(key: key);
@@ -10,68 +12,80 @@ class ContactsTab extends StatelessWidget {
   Widget build(BuildContext context) {
     var colors = Theme.of(context).colorScheme;
     var texts = Theme.of(context).textTheme;
-    return Container(
+    return SingleChildScrollView(
       child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-                Text(
-                  "Contact Details",
-                  style: texts.labelLarge!.copyWith(color: colors.onBackground),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-              ] +
-              data['contacts'].map<Widget>((contact) {
-                return Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Text(
-                          contact['contact_no'],
-                          style: texts.headlineSmall,
-                        ),
-                        Container(
-                          width: 150,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              IconButton(
-                                onPressed: () {},
-                                icon: Icon(Icons.call_outlined),
-                                style: IconButton.styleFrom(foregroundColor: colors.onPrimary, backgroundColor: colors.primary),
-                              ),
-                              IconButton(
-                                onPressed: () {
-                                  String c = contact['contact_no'].replaceAll(RegExp(r"\D"), "");
-                                  try {
-                                    c = "https://wa.me/91${c.substring(c.length - 10)}";
-                                    print(c);
-                                    urllauncher.launchUrl(Uri.parse(c));
-                                  } catch (e) {
-                                    print(e);
-                                  }
-                                },
-                                icon: FaIcon(FontAwesomeIcons.whatsapp),
-                                style: IconButton.styleFrom(foregroundColor: Colors.green, backgroundColor: colors.onBackground),
-                              ),
-                              IconButton(
-                                onPressed: () {},
-                                icon: FaIcon(FontAwesomeIcons.commentSms),
-                                style: IconButton.styleFrom(foregroundColor: colors.onTertiary, backgroundColor: colors.tertiary),
-                              ),
-                            ],
-                          ),
-                        )
-                      ],
+        children: [
+          Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                    Text(
+                      "Contact Details",
+                      style: texts.labelLarge!.copyWith(color: colors.onBackground),
                     ),
-                    Divider()
-                  ],
-                );
-              }).toList()),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                  ] +
+                  data['contacts'].map<Widget>((contact) {
+                    return Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            SelectableText(
+                              contact['contact_no'],
+                              style: texts.headlineSmall,
+                            ),
+                            SizedBox(
+                              width: 150,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  IconButton(
+                                    onPressed: () {
+                                      // print("tel:"+contact['contact_no']);
+                                      // ignore: prefer_interpolation_to_compose_strings
+                                      urllauncher.launchUrl(Uri.parse("tel:" + contact['contact_no']));
+                                    },
+                                    icon: const Icon(Icons.call_outlined),
+                                    style: IconButton.styleFrom(foregroundColor: colors.onPrimary, backgroundColor: colors.primary),
+                                  ),
+                                  IconButton(
+                                    onPressed: () {
+                                      String c = contact['contact_no'].replaceAll(RegExp(r"\D"), "");
+                                      try {
+                                        c = "whatsapp://send?phone=/?phone=91${c.substring(c.length - 10)}";
+                                        urllauncher.launchUrl(Uri.parse(c));
+                                      // ignore: empty_catches
+                                      } catch (e) {
+                                      }
+                                    },
+                                    icon: const FaIcon(FontAwesomeIcons.whatsapp),
+                                    style: IconButton.styleFrom(foregroundColor: Colors.green, backgroundColor: colors.onBackground),
+                                  ),
+                                  IconButton(
+                                    onPressed: () {
+                                      // ignore: prefer_interpolation_to_compose_strings
+                                      urllauncher.launchUrl(Uri.parse("sms:" + contact['contact_no']));
+                                    },
+                                    icon: const FaIcon(FontAwesomeIcons.commentSms),
+                                    style: IconButton.styleFrom(foregroundColor: colors.onTertiary, backgroundColor: colors.tertiary),
+                                  ),
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                        const Divider()
+                      ],
+                    );
+                  }).toList()),
+          const SizedBox(height: 10,),
+          AddressTab(data: data),
+        ],
+      ),
     );
   }
 }

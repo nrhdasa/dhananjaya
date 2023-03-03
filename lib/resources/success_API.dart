@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
 
@@ -11,12 +10,10 @@ class SuccessAPI extends StatefulWidget {
 }
 
 class _SuccessAPIState extends State<SuccessAPI> with TickerProviderStateMixin {
-  late AnimationController _animationController;
 
   @override
   void initState() {
     super.initState();
-    _animationController = AnimationController(vsync: this);
   }
 
   @override
@@ -30,10 +27,10 @@ class _SuccessAPIState extends State<SuccessAPI> with TickerProviderStateMixin {
           Lottie.asset("assets/lottie/success.json"),
           TweenAnimationBuilder(
             tween: Tween<double>(begin: 5, end: 1),
-            duration: Duration(milliseconds: 500),
+            duration: const Duration(milliseconds: 500),
             curve: Curves.easeInCirc,
             onEnd: () {
-              Future.delayed(Duration(seconds: 5)).then((value) {
+              Future.delayed(const Duration(seconds: 5)).then((value) {
                 context.go('/');
               });
             },

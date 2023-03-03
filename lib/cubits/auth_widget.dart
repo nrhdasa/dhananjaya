@@ -18,7 +18,6 @@ class _AuthWidgetState extends State<AuthWidget> {
     return BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {},
         builder: (context, state) {
-          print(state);
           if (state == AuthState.signedOut) {
             return Scaffold(
               backgroundColor: Theme.of(context).colorScheme.background,
@@ -33,7 +32,7 @@ class _AuthWidgetState extends State<AuthWidget> {
                   const SizedBox(
                     height: 10,
                   ),
-                  ElevatedButton(onPressed: () => context.go('/apipage'), child: Text("Enter API"))
+                  ElevatedButton(onPressed: () => context.go('/apipage'), child: const Text("Enter API"))
                   // HKMGeneralButton(
                   //     onPressed: () {
                   //       Navigator.pushNamedAndRemoveUntil(

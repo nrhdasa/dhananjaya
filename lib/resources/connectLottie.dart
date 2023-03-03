@@ -21,16 +21,14 @@ class _ConnectLottieState extends State<ConnectLottie> with TickerProviderStateM
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
-      body: Center(
-          child: Column(
+    return Center(
+      child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Lottie.asset("assets/lottie/connect.json"),
           TweenAnimationBuilder(
             tween: Tween<double>(begin: 5, end: 1),
-            duration: Duration(milliseconds: 5000),
+            duration: Duration(milliseconds: 2000),
             curve: Curves.easeInCirc,
             onEnd: () {},
             builder: (context, double val, child) {
@@ -42,7 +40,7 @@ class _ConnectLottieState extends State<ConnectLottie> with TickerProviderStateM
             child: Text(""),
           ),
         ],
-      )),
+      ),
     );
   }
 }

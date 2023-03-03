@@ -13,7 +13,7 @@ class Apipage extends StatefulWidget {
 class _ApipageState extends State<Apipage> {
   final _formKey = GlobalKey<FormState>();
   bool _iseditable = false;
-  Map<String, dynamic> _formData = {};
+  final Map<String, dynamic> _formData = {};
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +38,7 @@ class _ApipageState extends State<Apipage> {
                   shape: BoxShape.rectangle,
                   borderRadius: const BorderRadius.all(Radius.circular(20)),
                   color: Theme.of(context).colorScheme.background,
-                  boxShadow: [const BoxShadow(color: Colors.black12)],
+                  boxShadow: const [BoxShadow(color: Colors.black12)],
                   border: Border.all(width: .1, color: Colors.black)),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -131,7 +131,6 @@ class _ApipageState extends State<Apipage> {
                             !_iseditable
                                 ? ElevatedButton(
                                     onPressed: () async {
-                                      print(_formData);
                                       bool status = await Auth.checkAPI(_formData['domain'], _formData['key'], _formData['secret']);
                                       if (status == true) {
                                         Auth.setAPI(_formData['domain'], _formData['key'], _formData['secret']);

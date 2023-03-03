@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class NoInternet extends StatelessWidget {
+  const NoInternet({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -8,13 +10,13 @@ class NoInternet extends StatelessWidget {
       body: Align(
         alignment: Alignment.center,
         child: Padding(
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.max,
             children: [
-              Text(
+              const Text(
                 "No Internet Connection",
                 textAlign: TextAlign.start,
                 overflow: TextOverflow.clip,
@@ -29,7 +31,7 @@ class NoInternet extends StatelessWidget {
                 color: Theme.of(context).colorScheme.error,
                 size: 200,
               ),
-              Text(
+              const Text(
                 "Please check your connection and try again.",
                 textAlign: TextAlign.center,
                 overflow: TextOverflow.clip,
