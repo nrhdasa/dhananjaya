@@ -37,12 +37,3 @@ Future<Map<String, dynamic>> getDonorStats(String donorId) async {
   );
   return jsonDecode(response.body)['message'];
 }
-
-updateLongLatAddress(String addressId, double lng, double lat) async {
-  var api = await Auth.getAPI();
-  Uri url = Uri.https(
-    api['domain'],
-    '/api/resource/Donor Address/$addressId',
-  );
-  var response = await http.put(url, headers: {'Authorization': 'token ${api["key"]}:${api["secret"]}'}, body: {'longitude': lng.toString(), 'latitude': lat.toString()});
-}

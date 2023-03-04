@@ -48,6 +48,8 @@ dependencies:
   intl: ^0.18.0
   fl_chart: ^0.61.0
   location: ^4.4.0
+  bloc: ^8.1.1
+  very_good_analysis: ^4.0.0+1
 
 dev_dependencies:
   flutter_test:

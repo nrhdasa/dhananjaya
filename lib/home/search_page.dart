@@ -21,23 +21,23 @@ class _SearchDonorState extends State<SearchDonor> {
   @override
   Widget build(BuildContext context) {
     var colors = Theme.of(context).colorScheme;
-    return Scaffold(
-        resizeToAvoidBottomInset: true,
-        body: SafeArea(
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(10),
-                  height: MediaQuery.of(context).size.height * .13,
-                  child: Column(
-                    children: [
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Hero(
-                        tag: "search-donor",
-                        child: TextField(
+    return Hero(
+      tag: "search-donor",
+      child: SafeArea(
+        child: Scaffold(
+            resizeToAvoidBottomInset: true,
+            body: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    height: MediaQuery.of(context).size.height * .13,
+                    child: Column(
+                      children: [
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        TextField(
                           autofocus: true,
                           controller: searchController,
                           style: Theme.of(context).textTheme.headlineLarge,
@@ -63,52 +63,52 @@ class _SearchDonorState extends State<SearchDonor> {
                             });
                           },
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-                Container(
-                  padding: const EdgeInsets.all(10),
-                  height: MediaQuery.of(context).size.height * .87,
-                  child: _waiting
-                      ? const ConnectLottie()
-                      : Stack(
-                          children: [
-                            ListView.builder(
-                                itemCount: donors.length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  return DonorTile(donor: donors[index]);
-                                }),
-                            Container(
-                              height: 30,
-                              width: MediaQuery.of(context).size.width,
-                              decoration: BoxDecoration(
-                                  gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [
-                                colors.background,
-                                colors.background.withOpacity(0),
-                              ])),
-                            ),
-                            Positioned(
-                                bottom: 0,
-                                child: Container(
-                                  height: 20,
-                                  width: MediaQuery.of(context).size.width,
-                                  decoration: BoxDecoration(
-                                    gradient: LinearGradient(begin: Alignment.bottomCenter, end: Alignment.topCenter, colors: [colors.background, colors.background.withOpacity(0)]),
-                                  ),
-                                ))
-                            // Container(
-                            //   height: 30,
-                            //   width: double.infinity,
-                            //   decoration: BoxDecoration(gradient: LinearGradient(begin: Alignment.bottomCenter, end: Alignment.topCenter, colors: [colors.background, colors.background.withOpacity(.2)])),
-                            // ),
-                          ],
-                        ),
-                )
-              ],
-            ),
-          ),
-        ));
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    height: MediaQuery.of(context).size.height * .87,
+                    child: _waiting
+                        ? const ConnectLottie()
+                        : Stack(
+                            children: [
+                              ListView.builder(
+                                  itemCount: donors.length,
+                                  itemBuilder: (BuildContext context, int index) {
+                                    return DonorTile(donor: donors[index]);
+                                  }),
+                              Container(
+                                height: 30,
+                                width: MediaQuery.of(context).size.width,
+                                decoration: BoxDecoration(
+                                    gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [
+                                  colors.background,
+                                  colors.background.withOpacity(0),
+                                ])),
+                              ),
+                              Positioned(
+                                  bottom: 0,
+                                  child: Container(
+                                    height: 20,
+                                    width: MediaQuery.of(context).size.width,
+                                    decoration: BoxDecoration(
+                                      gradient: LinearGradient(begin: Alignment.bottomCenter, end: Alignment.topCenter, colors: [colors.background, colors.background.withOpacity(0)]),
+                                    ),
+                                  ))
+                              // Container(
+                              //   height: 30,
+                              //   width: double.infinity,
+                              //   decoration: BoxDecoration(gradient: LinearGradient(begin: Alignment.bottomCenter, end: Alignment.topCenter, colors: [colors.background, colors.background.withOpacity(.2)])),
+                              // ),
+                            ],
+                          ),
+                  )
+                ],
+              ),
+            )),
+      ),
+    );
   }
 }
 

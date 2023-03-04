@@ -1,5 +1,8 @@
+import 'package:dhananjaya/donor/donor_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:url_launcher/url_launcher.dart' as urllauncher;
 import 'package:location/location.dart';
 
@@ -51,21 +54,8 @@ class _AddressTabState extends State<AddressTab> {
                               locationUpdating
                                   ? ElevatedButton(
                                       onPressed: () async {
-                                        setState(() {
-                                          locationUpdating = false;
-                                        });
-                                        await updateLocation(address['name']);
-                                        setState(() {
-                                          locationUpdating = true;
-                                        });
                                         Navigator.pop(context);
-                                        showDialog(
-                                            context: context,
-                                            builder: (context) {
-                                              return AlertDialog(
-                                                content: Text("Location is Updated."),
-                                              );
-                                            });
+                                        await super.context.read<DonorCubit>().updateLocation(address['name']);
                                       },
                                       child: const Text("Update Location"))
                                   : Container(),
@@ -129,35 +119,6 @@ class _AddressTabState extends State<AddressTab> {
               }).toList()),
     );
   }
-}
-
-updateLocation(String addressId) async {
-  Location location = Location();
-
-  bool serviceEnabled;
-  PermissionStatus permissionGranted;
-  LocationData locationData;
-
-  serviceEnabled = await location.serviceEnabled();
-  if (!serviceEnabled) {
-    serviceEnabled = await location.requestService();
-    if (!serviceEnabled) {
-      return;
-    }
-  }
-
-  permissionGranted = await location.hasPermission();
-  if (permissionGranted == PermissionStatus.denied) {
-    permissionGranted = await location.requestPermission();
-    if (permissionGranted != PermissionStatus.granted) {
-      return;
-    }
-  }
-
-  locationData = await location.getLocation();
-  print(locationData);
-
-  updateLongLatAddress(addressId, locationData.longitude ?? 0.0, locationData.latitude ?? 0.0);
 }
 
 getAddressString(address) {

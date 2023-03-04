@@ -21,47 +21,51 @@ class AnalysisTab extends StatelessWidget {
           List<dynamic> totalCompanies = snapshot.data!['total'];
 
           for (var element in lastYearCompanies) {
-            lastYearDonations.add(
-              Column(
-                children: [
-                  Container(
-                    // margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(color: colors.tertiaryContainer, shape: BoxShape.rectangle),
-                    child: Text(
-                      "${(element['amount']!/100000).toStringAsFixed(2)} L",
-                      style: texts.displaySmall!.copyWith(color: colors.onTertiaryContainer),
-                    ),
+            lastYearDonations.add(Column(
+              children: [
+                Container(
+                  // margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                      color: colors.tertiaryContainer,
+                      shape: BoxShape.rectangle),
+                  child: Text(
+                    "${(element['amount']! / 100000).toStringAsFixed(2)} L",
+                    style: texts.displaySmall!
+                        .copyWith(color: colors.onTertiaryContainer),
                   ),
-                  Text(
-                    element['company'],
-                    style: texts.labelLarge!.copyWith(fontWeight: FontWeight.bold),
-                  )
-                ],
-              )
-            );
-           }
-           for (var element in totalCompanies) {
-            totalDonations.add(
-              Column(
-                children: [
-                  Container(
-                    // margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(color: colors.tertiaryContainer, shape: BoxShape.rectangle),
-                    child: Text(
-                      "${(element['amount']!/100000).toStringAsFixed(2)} L",
-                      style: texts.displaySmall!.copyWith(color: colors.onTertiaryContainer),
-                    ),
+                ),
+                Text(
+                  element['company'],
+                  style:
+                      texts.labelLarge!.copyWith(fontWeight: FontWeight.bold),
+                )
+              ],
+            ));
+          }
+          for (var element in totalCompanies) {
+            totalDonations.add(Column(
+              children: [
+                Container(
+                  // margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                      color: colors.tertiaryContainer,
+                      shape: BoxShape.rectangle),
+                  child: Text(
+                    "${(element['amount']! / 100000).toStringAsFixed(2)} L",
+                    style: texts.displaySmall!
+                        .copyWith(color: colors.onTertiaryContainer),
                   ),
-                  Text(
-                    element['company'],
-                    style: texts.labelLarge!.copyWith(fontWeight: FontWeight.bold),
-                  )
-                ],
-              )
-            );
-           }
+                ),
+                Text(
+                  element['company'],
+                  style:
+                      texts.labelLarge!.copyWith(fontWeight: FontWeight.bold),
+                )
+              ],
+            ));
+          }
           return SingleChildScrollView(
             child: Column(
               children: [
@@ -70,18 +74,28 @@ class AnalysisTab extends StatelessWidget {
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: lastYearDonations,),
+                  children: lastYearDonations,
+                ),
                 Text(
                   "DONATIONS LAST YEAR",
-                  style: TextStyle(fontStyle: FontStyle.italic,fontSize: 20,color: colors.secondary),
+                  style: TextStyle(
+                      fontStyle: FontStyle.italic,
+                      fontSize: 20,
+                      color: colors.secondary),
                 ),
-                const SizedBox(height: 20,),
+                const SizedBox(
+                  height: 20,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: totalDonations,),
+                  children: totalDonations,
+                ),
                 Text(
                   "DONATIONS BY NOW",
-                  style: TextStyle(fontStyle: FontStyle.italic,fontSize: 20,color: colors.secondary),
+                  style: TextStyle(
+                      fontStyle: FontStyle.italic,
+                      fontSize: 20,
+                      color: colors.secondary),
                 ),
                 const SizedBox(
                   height: 10,

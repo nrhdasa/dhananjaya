@@ -1,4 +1,3 @@
-
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -50,7 +49,6 @@ class _DonationChartState extends State<_DonationChart> {
           tooltipBgColor: colors.onBackground.withOpacity(0.2),
           getTooltipItems: (touchedSpots) {
             return touchedSpots.map((spot) {
-              // print(spot.x);
               var num = ((listSteps.last / (y_axis_steps)) * spot.y).toStringAsFixed(2);
               return LineTooltipItem(
                 '${num.toString()}\nL',
@@ -99,7 +97,6 @@ class _DonationChartState extends State<_DonationChart> {
 
   List<double> get listSteps {
     final List<double> valuesList = widget.data.values.expand((entry) => entry.values).toList();
-    print(valuesList);
     double maxVal = 0;
     if (valuesList.length == 0) {
       maxVal = 0;
@@ -107,7 +104,6 @@ class _DonationChartState extends State<_DonationChart> {
       maxVal = valuesList.reduce((a, b) => a > b ? a : b);
     }
 
-    print(maxVal);
     List<double> listSteps = List.generate(y_axis_steps.toInt() + 1, (index) {
       double fraction = index / (y_axis_steps.toInt());
       double value = 0 + fraction * (maxVal - 0);
@@ -127,7 +123,6 @@ class _DonationChartState extends State<_DonationChart> {
       String formattedDate = '$monthAbbreviation-$yearAbbreviation';
       months.add(formattedDate);
     }
-    print(months);
 
     return months.reversed.toList();
   }
@@ -144,7 +139,6 @@ class _DonationChartState extends State<_DonationChart> {
         data.add(FlSpot(i.toDouble(), 0));
       }
     }
-    print(data);
     return data;
   }
 
@@ -200,7 +194,7 @@ class _DonationChartState extends State<_DonationChart> {
         colors: [Colors.red, lineColor],
       ),
       // color: lineColor,
-      barWidth: 9,
+      barWidth: 5,
       isStrokeCapRound: true,
       isStrokeJoinRound: true,
       dotData: FlDotData(show: false),
@@ -235,8 +229,7 @@ class DonationChartState extends State<DonationChart> {
         future: getUserStats(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
-            List<Color> lineColors = [colors.primary, colors.secondary, colors.tertiary];
-            print(snapshot.data!.keys);
+            List<Color> lineColors = [Colors.amber.shade400, Colors.blueAccent.shade400, Colors.purple];
             List<Widget> indicatorWidgets = [];
             List<Widget> totalDonations = [];
             List<String> companies = snapshot.data!.keys.toList();

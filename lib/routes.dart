@@ -2,15 +2,16 @@ import 'package:dhananjaya/cubits/auth_widget.dart';
 import 'package:dhananjaya/cubits/internet_cubit.dart';
 import 'package:dhananjaya/home/search_page.dart';
 import 'package:dhananjaya/resources/success_API.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:flutter/material.dart';
 
 import 'apipage.dart';
 import 'cubits/auth_cubit.dart';
 import 'cubits/internet_widget.dart';
 import 'donor/donor.dart';
 import 'home/homepage.dart';
+import 'home/success_donor.dart';
 
 final AuthCubit _authCubit = AuthCubit();
 final InternetCubit _internetCubit = InternetCubit();
@@ -52,7 +53,14 @@ final GoRouter router = GoRouter(
               builder: (BuildContext context, GoRouterState state) => DBlocBuilder(
                       child: DonorPage(
                     id: state.params["id"]!,
-                  )))
+                  )),
+              routes: <RouteBase>[
+                GoRoute(
+                  name: 'successDonor',
+                  path: 'successDonor',
+                  builder: (BuildContext context, GoRouterState state) => const SuccessDonor(),
+                ),
+              ])
         ]),
       ],
     ),
