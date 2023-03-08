@@ -60,7 +60,8 @@ class _AddressTabState extends State<AddressTab> {
                                       child: const Text("Update Location"))
                                   : Container(),
                               ElevatedButton(
-                                  child: const Text("Go to Location"),
+                                style: ElevatedButton.styleFrom(backgroundColor: colors.secondaryContainer),
+                                  child:  Text("Go to Location",style: TextStyle(color: colors.onSecondaryContainer),),
                                   onPressed: () {
                                     urllauncher.launchUrl(Uri.parse("https://www.google.com/maps/search/?api=1&query=${address['latitude']},${address['longitude']}"));
                                   })

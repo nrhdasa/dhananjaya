@@ -1,8 +1,10 @@
 import 'package:dhananjaya/donor/analysis.dart';
 import 'package:dhananjaya/donor/donation.dart';
 import 'package:dhananjaya/donor/donor_cubit.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../resources/connectLottie.dart';
 import '../resources/elements.dart';
@@ -27,6 +29,12 @@ class _DonorPageState extends State<DonorPage> {
     return DefaultTabController(
       length: 4,
       child: Scaffold(
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            context.goNamed("create_receipt", params: {'id': widget.id});
+          },
+          child: Icon(Icons.add),
+        ),
         body: SafeArea(
             child: BlocProvider(
                 create: (_) => DonorCubit(donorId: widget.id),

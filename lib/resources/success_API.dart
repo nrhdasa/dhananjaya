@@ -10,7 +10,6 @@ class SuccessAPI extends StatefulWidget {
 }
 
 class _SuccessAPIState extends State<SuccessAPI> with TickerProviderStateMixin {
-
   @override
   void initState() {
     super.initState();
@@ -26,11 +25,11 @@ class _SuccessAPIState extends State<SuccessAPI> with TickerProviderStateMixin {
         children: [
           Lottie.asset("assets/lottie/success.json"),
           TweenAnimationBuilder(
-            tween: Tween<double>(begin: 5, end: 1),
+            tween: Tween<double>(begin: 2, end: 1),
             duration: const Duration(milliseconds: 500),
             curve: Curves.easeInCirc,
             onEnd: () {
-              Future.delayed(const Duration(seconds: 5)).then((value) {
+              Future.delayed(const Duration(seconds: 2)).then((value) {
                 context.go('/');
               });
             },

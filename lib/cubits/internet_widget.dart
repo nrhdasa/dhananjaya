@@ -32,18 +32,3 @@ class _InternetWidgetState extends State<InternetWidget> {
         });
   }
 }
-
-// class NoConnectionWidget extends StatelessWidget {
-//   const NoConnectionWidget({Key? key}) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: Center(
-//           child: Image.asset(
-//         "assets/error/No Connection.png",
-//         fit: BoxFit.fill,
-//       )),
-//     );
-//   }
-// }

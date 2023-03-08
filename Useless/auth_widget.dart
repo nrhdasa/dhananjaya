@@ -33,12 +33,6 @@ class _AuthWidgetState extends State<AuthWidget> {
                     height: 10,
                   ),
                   ElevatedButton(onPressed: () => context.go('/apipage'), child: const Text("Enter API"))
-                  // HKMGeneralButton(
-                  //     onPressed: () {
-                  //       Navigator.pushNamedAndRemoveUntil(
-                  //           context, "login", (route) => false);
-                  //     },
-                  //     child: const Text("Log In")),
                 ],
               ),
             );

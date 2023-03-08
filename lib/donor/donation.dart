@@ -20,164 +20,164 @@ class DonationTab extends StatelessWidget {
       const SizedBox(
     height: 20,
       ),
-      SizedBox(
-      height: MediaQuery.of(context).size.height * .60,
-      child: FutureBuilder(
+      FutureBuilder(
         future: getDonations(data['name']),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             List<dynamic> donation = snapshot.data ?? [];
-            return ListView.builder(
-                itemCount: donation.length,
-                itemBuilder: (BuildContext context, int index) {
-                  // Text(donation[index]['name']),
-                  return Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            width: 30,
-                            child: Stack(
-                              clipBehavior: Clip.none,
-                              alignment: Alignment.centerLeft,
-                              children: [
-                                Positioned(
-                                  child: SizedBox(
-                                      height: 120,
-                                      child: VerticalDivider(
-                                        color: colors.primary,
-                                        thickness: 2,
-                                      )),
-                                ),
-                                Positioned(
-                                  left: 2.5,
-                                  // left: MediaQuery.of(context).size.width * .2,
-                                  // width: 50,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    children: [
-                                      Container(
-                                        height: 10,
-                                        width: 10,
-                                        decoration: BoxDecoration(shape: BoxShape.circle, color: colors.onBackground),
-                                      ),
-                                      const SizedBox(
-                                        width: 2,
-                                      ),
-                                      Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Text(getDateinFormat(donation[index]['receipt_date'], "yyyy"), style: const TextStyle(fontWeight: FontWeight.bold)),
-                                          Text(getDateinFormat(donation[index]['receipt_date'], "MMM dd ")),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            return Container(
+              height: MediaQuery.of(context).size.height-300,
+              child: ListView.builder(
+                shrinkWrap: true,
+                  itemCount: donation.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    // Text(donation[index]['name']),
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          width: 30,
+                          child: Stack(
+                            clipBehavior: Clip.none,
+                            alignment: Alignment.centerLeft,
                             children: [
-                              SizedBox(
-                                width: MediaQuery.of(context).size.width * .85,
+                              Positioned(
+                                child: SizedBox(
+                                    height: 120,
+                                    child: VerticalDivider(
+                                      color: colors.primary,
+                                      thickness: 2,
+                                    )),
+                              ),
+                              Positioned(
+                                left: 2.5,
+                                // left: MediaQuery.of(context).size.width * .2,
+                                // width: 50,
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Container(
-                                      margin: const EdgeInsets.only(left: 50),
-                                      width: 150,
-                                      child: SizedBox(
-                                        height: 90,
-                                        child: Column(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                              children: [
-                                                Column(
-                                                  children: [
-                                                    Container(
-                                                        height: 30,
-                                                        width: 30,
-                                                        decoration: BoxDecoration(shape: BoxShape.circle, color: colors.tertiaryContainer),
-                                                        child: Icon(
-                                                          Icons.domain,
-                                                          color: colors.onTertiaryContainer,
-                                                        )),
-                                                    Text(donation[index]['company_abbreviation'])
-                                                  ],
-                                                ),
-                                                const SizedBox(
-                                                  width: 10,
-                                                ),
-                                                Column(
-                                                  children: [
-                                                    Container(
-                                                        height: 30,
-                                                        width: 30,
-                                                        decoration: BoxDecoration(shape: BoxShape.circle, color: colors.tertiaryContainer),
-                                                        child: Icon(
-                                                          Icons.payments_outlined,
-                                                          color: colors.onTertiaryContainer,
-                                                        )),
-                                                    Text(donation[index]['payment_method'])
-                                                  ],
-                                                ),
-                                                const SizedBox(
-                                                  width: 10,
-                                                ),
-                                                Column(
-                                                  children: [
-                                                    Container(
-                                                        height: 30,
-                                                        width: 30,
-                                                        decoration: BoxDecoration(shape: BoxShape.circle, color: colors.tertiaryContainer),
-                                                        child: Icon(
-                                                          Icons.person_2_outlined,
-                                                          color: colors.onTertiaryContainer,
-                                                        )),
-                                                    Text(donation[index]['preacher'])
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                            Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                              crossAxisAlignment: CrossAxisAlignment.center,
-                                              children: [
-                                                Column(
-                                                  mainAxisAlignment: MainAxisAlignment.center,
-                                                  children: [
-                                                    Text(
-                                                      "Towards",
-                                                      style: TextStyle(fontSize: 10, color: colors.primary.withOpacity(.8)),
-                                                    ),
-                                                    SizedBox(
-                                                        width: 100,
-                                                        height: 20,
-                                                        child: FittedBox(fit: BoxFit.fitHeight, child: Text(donation[index]['seva_type'] + "(" + donation[index]['seva_subtype'] + ")"))),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ),
+                                      height: 10,
+                                      width: 10,
+                                      decoration: BoxDecoration(shape: BoxShape.circle, color: colors.onBackground),
                                     ),
                                     const SizedBox(
-                                      width: 10,
+                                      width: 2,
                                     ),
-                                    SizedBox(
-                                        height: 60,
-                                        child: VerticalDivider(
-                                          thickness: 1,
-                                          color: colors.primary,
-                                        )),
                                     Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(getDateinFormat(donation[index]['receipt_date'], "yyyy"), style: const TextStyle(fontWeight: FontWeight.bold)),
+                                        Text(getDateinFormat(donation[index]['receipt_date'], "MMM dd ")),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width * .85,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Container(
+                                    margin: const EdgeInsets.only(left: 50),
+                                    width: 150,
+                                    child: SizedBox(
+                                      height: 90,
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Column(
+                                                children: [
+                                                  Container(
+                                                      height: 30,
+                                                      width: 30,
+                                                      decoration: BoxDecoration(shape: BoxShape.circle, color: colors.tertiaryContainer),
+                                                      child: Icon(
+                                                        Icons.domain,
+                                                        color: colors.onTertiaryContainer,
+                                                      )),
+                                                  Text(donation[index]['company_abbreviation'])
+                                                ],
+                                              ),
+                                              const SizedBox(
+                                                width: 10,
+                                              ),
+                                              Column(
+                                                children: [
+                                                  Container(
+                                                      height: 30,
+                                                      width: 30,
+                                                      decoration: BoxDecoration(shape: BoxShape.circle, color: colors.tertiaryContainer),
+                                                      child: Icon(
+                                                        Icons.payments_outlined,
+                                                        color: colors.onTertiaryContainer,
+                                                      )),
+                                                  Text(donation[index]['payment_method'])
+                                                ],
+                                              ),
+                                              const SizedBox(
+                                                width: 10,
+                                              ),
+                                              Column(
+                                                children: [
+                                                  Container(
+                                                      height: 30,
+                                                      width: 30,
+                                                      decoration: BoxDecoration(shape: BoxShape.circle, color: colors.tertiaryContainer),
+                                                      child: Icon(
+                                                        Icons.person_2_outlined,
+                                                        color: colors.onTertiaryContainer,
+                                                      )),
+                                                  Text(donation[index]['preacher'])
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                          Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                            children: [
+                                              Column(
+                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                children: [
+                                                  Text(
+                                                    "Towards",
+                                                    style: TextStyle(fontSize: 10, color: colors.primary.withOpacity(.8)),
+                                                  ),
+                                                  SizedBox(
+                                                      width: 100,
+                                                      height: 20,
+                                                      child: FittedBox(fit: BoxFit.fitHeight, child: Text(donation[index]['seva_type'] + "(" + donation[index]['seva_subtype'] + ")"))),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  SizedBox(
+                                      height: 60,
+                                      child: VerticalDivider(
+                                        thickness: 1,
+                                        color: colors.primary,
+                                      )),
+                                  Flexible(
+                                    child: Column(
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       crossAxisAlignment: CrossAxisAlignment.end,
                                       children: [
@@ -199,29 +199,29 @@ class DonationTab extends StatelessWidget {
                                           style: const TextStyle(fontSize: 8),
                                         )
                                       ],
-                                    )
-                                  ],
-                                ),
+                                    ),
+                                  )
+                                ],
                               ),
-                              Container(
-                                  alignment: Alignment.center,
-                                  width: MediaQuery.of(context).size.width * .85,
-                                  child: Divider(
-                                    color: colors.onBackground,
-                                    thickness: .5,
-                                  )),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ],
-                  );
-                });
+                            ),
+                            Container(
+                                alignment: Alignment.center,
+                                width: MediaQuery.of(context).size.width * .85,
+                                child: Divider(
+                                  color: colors.onBackground,
+                                  thickness: .5,
+                                )),
+                          ],
+                        ),
+                      ],
+                    );
+                  }),
+            );
           } else {
             return const ConnectLottie();
           }
         },
-      ))
+      )
     ]);
   }
 

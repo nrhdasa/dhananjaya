@@ -50,10 +50,19 @@ dependencies:
   location: ^4.4.0
   bloc: ^8.1.1
   very_good_analysis: ^4.0.0+1
+  bloc_concurrency: ^0.2.1
+  easy_debounce: ^2.0.3
+  socket_io_client: ^2.0.1
+  fpdart: ^0.5.0
+  equatable: ^2.0.5
+  json_annotation: ^4.8.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  
+  json_serializable: ^6.6.1
+  build_runner: ^2.3.3
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

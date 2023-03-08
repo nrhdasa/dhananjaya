@@ -1,19 +1,15 @@
-import 'package:dhananjaya/cubits/auth_widget.dart';
 import 'package:dhananjaya/cubits/internet_cubit.dart';
-import 'package:dhananjaya/home/search_page.dart';
+import 'package:dhananjaya/receipt/create_receipt.dart';
+import 'package:dhananjaya/search/search_page.dart';
 import 'package:dhananjaya/resources/success_API.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-
-import 'apipage.dart';
-import 'cubits/auth_cubit.dart';
 import 'cubits/internet_widget.dart';
 import 'donor/donor.dart';
+import 'search/filters_page.dart';
 import 'home/homepage.dart';
-import 'home/success_donor.dart';
 
-final AuthCubit _authCubit = AuthCubit();
 final InternetCubit _internetCubit = InternetCubit();
 
 class DBlocBuilder extends StatelessWidget {
@@ -22,13 +18,7 @@ class DBlocBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<InternetCubit>.value(
-        value: _internetCubit,
-        child: BlocProvider<AuthCubit>.value(
-            value: _authCubit,
-            child: InternetWidget(
-              child: AuthWidget(child: child),
-            )));
+    return BlocProvider<InternetCubit>.value(value: _internetCubit, child: InternetWidget(child: child));
   }
 }
 
@@ -42,25 +32,34 @@ final GoRouter router = GoRouter(
           path: 'successapi',
           builder: (BuildContext context, GoRouterState state) => const SuccessAPI(),
         ),
-        GoRoute(
-          path: 'apipage',
-          builder: (BuildContext context, GoRouterState state) => const Apipage(),
-        ),
         GoRoute(path: 'searchdonor', builder: (BuildContext context, GoRouterState state) => const DBlocBuilder(child: SearchDonor()), routes: <RouteBase>[
           GoRoute(
-              name: "donor",
-              path: "donor/:id",
-              builder: (BuildContext context, GoRouterState state) => DBlocBuilder(
-                      child: DonorPage(
+            name: "filters_page",
+            path: "filters_page",
+            builder: (context, state) => DBlocBuilder(
+              child: FilterPage(),
+            ),
+          ),
+          GoRoute(
+            name: "donor",
+            path: "donor/:id",
+            builder: (BuildContext context, GoRouterState state) => DBlocBuilder(
+              child: DonorPage(
+                id: state.params["id"]!,
+              ),
+            ),
+            routes: <RouteBase>[
+              GoRoute(
+                name: "create_receipt",
+                path: "create_receipt",
+                builder: (context, state) => DBlocBuilder(
+                  child: CreateReceipt(
                     id: state.params["id"]!,
-                  )),
-              routes: <RouteBase>[
-                GoRoute(
-                  name: 'successDonor',
-                  path: 'successDonor',
-                  builder: (BuildContext context, GoRouterState state) => const SuccessDonor(),
+                  ),
                 ),
-              ])
+              ),
+            ],
+          )
         ]),
       ],
     ),
